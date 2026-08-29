@@ -1,13 +1,14 @@
 import { cn } from '@utils/cn';
 
-import type { PropsType } from './types';
+import { PAGE_ELLIPSIS } from './constants';
+import type { PaginationProps } from './types';
 
 const BUTTON_BASE_CLASS =
   'pagination-button inline-flex cursor-pointer items-center justify-center rounded-lg border px-[11px] py-1.5 text-[13px] transition-colors';
 const BUTTON_IDLE_CLASS =
   'border-border bg-card text-ink-2 hover:bg-row-hover disabled:pointer-events-none disabled:opacity-40';
 
-const Pagination = (props: PropsType) => {
+const Pagination = (props: PaginationProps) => {
   const {
     page,
     totalPages,
@@ -47,21 +48,32 @@ const Pagination = (props: PropsType) => {
           ‹
         </button>
 
-        {pageNumbers.map((pageNumber) => (
-          <button
-            key={pageNumber}
-            type="button"
-            onClick={() => onPageChange(pageNumber)}
-            className={cn(
-              BUTTON_BASE_CLASS,
-              pageNumber === page
-                ? 'border-blue bg-blue-soft text-blue px-[12px] font-bold'
-                : BUTTON_IDLE_CLASS,
-            )}
-          >
-            {pageNumber}
-          </button>
-        ))}
+        {pageNumbers.map((item, index) =>
+          item === PAGE_ELLIPSIS ? (
+            <span
+              key={`${PAGE_ELLIPSIS}-${index}`}
+              aria-hidden="true"
+              className="text-ink-3 px-1 text-[13px] select-none"
+            >
+              …
+            </span>
+          ) : (
+            <button
+              key={item}
+              type="button"
+              aria-current={item === page ? 'page' : undefined}
+              onClick={() => onPageChange(item)}
+              className={cn(
+                BUTTON_BASE_CLASS,
+                item === page
+                  ? 'border-blue bg-blue-soft text-blue px-[12px] font-bold'
+                  : BUTTON_IDLE_CLASS,
+              )}
+            >
+              {item}
+            </button>
+          ),
+        )}
 
         <button
           type="button"
@@ -71,15 +83,6 @@ const Pagination = (props: PropsType) => {
           aria-label="Next page"
         >
           ›
-        </button>
-
-        <button
-          type="button"
-          disabled={isLastPage}
-          onClick={() => onPageChange(totalPages)}
-          className={cn(BUTTON_BASE_CLASS, BUTTON_IDLE_CLASS)}
-        >
-          Terakhir
         </button>
       </div>
     </div>

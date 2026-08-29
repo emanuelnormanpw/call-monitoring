@@ -4,7 +4,7 @@ const ErrorState = (props: PropsType) => {
   const { message, onRetry } = props;
 
   return (
-    <div className="bg-card flex min-h-[220px] flex-col items-center justify-center p-8 text-center">
+    <div className="bg-card flex min-h-55 flex-col items-center justify-center p-8 text-center">
       <p className="text-danger-ink text-sm font-medium">
         Gagal memuat data panggilan: {message || 'Terjadi kesalahan'}
       </p>
