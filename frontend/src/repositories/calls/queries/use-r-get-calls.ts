@@ -15,6 +15,10 @@ export function useRGetCalls(
   const {
     search,
     sentiment,
+    startDate,
+    endDate,
+    sortBy,
+    sortDir,
     page: pageOverride,
     limit: limitOverride,
     ...resOptions
@@ -32,6 +36,10 @@ export function useRGetCalls(
         page: pageOverride ?? (queryParams.page ? Number(queryParams.page) : 1),
         search: search || undefined,
         sentiment: resolvedSentiment,
+        start_date: startDate || undefined,
+        end_date: endDate || undefined,
+        sort_by: sortBy || undefined,
+        sort_dir: sortDir || undefined,
       },
     ],
     staleTime: 1000 * 60 * 5,
