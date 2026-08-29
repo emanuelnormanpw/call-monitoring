@@ -30,6 +30,10 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/call_monitoring
+      # The frontend service below is published on 5173, so it must be allowed.
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3001
+      # Period bounds and the timestamp shown in search are read in this zone.
+      APP_TIMEZONE: Asia/Jakarta
     depends_on:
       postgres:
         condition: service_healthy
