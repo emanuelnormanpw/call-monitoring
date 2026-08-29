@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # 1. Database Service
+  postgres:
+    image: postgres:16-alpine
+    container_name: call-mon-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: call_monitoring
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./backend/db/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+
+  # 2. Backend Service (Rust)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: call-mon-backend
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/call_monitoring
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # 3. Frontend Service (React + Nginx / Vite)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: call-mon-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
