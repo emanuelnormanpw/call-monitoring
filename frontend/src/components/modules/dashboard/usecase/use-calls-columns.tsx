@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
+import { createColumnHelper } from '@tanstack/react-table';
 
-import { SentimentBadge } from '@elements';
+import { SentimentBadge } from '@elements/sentiment-badge';
 import type { CallItem } from '@repositories/calls';
 
 import { TIMESTAMP_FORMAT } from './constants';
@@ -21,13 +21,13 @@ export const useCallsColumns = () => {
         ),
       }),
       columnHelper.accessor('csName', {
-        header: 'CS Agent',
+        header: 'Nama CS',
         cell: (info) => (
           <span className="text-ink font-medium">{info.getValue()}</span>
         ),
       }),
       columnHelper.accessor('customerName', {
-        header: 'Customer',
+        header: 'Nasabah',
         cell: (info) => <span className="text-ink">{info.getValue()}</span>,
       }),
       columnHelper.accessor('sentimentScore', {

@@ -13,25 +13,37 @@ import { useCallsTable, useDashboardCallMonitoring } from './usecase';
 const Dashboard = () => {
   const {
     calls,
+    endDate,
     endEntry,
     error,
     isError,
     isLoading,
+    maxDate,
+    minDate,
     page,
     pageNumbers,
     searchInput,
     sentiment,
+    sorting,
+    startDate,
     startEntry,
     totalData,
     totalPages,
     handleClearSearch,
+    handleEndDateChange,
     handlePageChange,
     handleRetry,
     handleSearchChange,
     handleSentimentChange,
+    handleSortingChange,
+    handleStartDateChange,
   } = useDashboardCallMonitoring();
 
-  const table = useCallsTable(calls);
+  const table = useCallsTable({
+    data: calls,
+    sorting,
+    onSortingChange: handleSortingChange,
+  });
 
   const isEmpty = calls.length === 0;
 
@@ -42,9 +54,15 @@ const Dashboard = () => {
       <Toolbar
         search={searchInput}
         sentiment={sentiment}
+        startDate={startDate}
+        endDate={endDate}
+        minDate={minDate}
+        maxDate={maxDate}
         onSearchChange={handleSearchChange}
         onClearSearch={handleClearSearch}
         onSentimentChange={handleSentimentChange}
+        onStartDateChange={handleStartDateChange}
+        onEndDateChange={handleEndDateChange}
       />
 
       <div className="table-surface rounded-card border-border bg-card overflow-hidden border shadow-xs">
