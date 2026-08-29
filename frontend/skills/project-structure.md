@@ -42,7 +42,7 @@ Sort imports in this group by reverse depth:
 - Use the following standard pattern for component declarations and prop destructuring:
 
 ```ts
-const ComponentName = (props: PropsType) => {
+const ComponentName = (props: ComponentNameProps) => {
   const { /* fields */ } = props;
 
   return (
@@ -51,7 +51,7 @@ const ComponentName = (props: PropsType) => {
 };
 ```
 
-- Define `PropsType` in a separate `types.ts` file within the same folder as the component.
+- Define `ComponentNameProps` in a separate `types.ts` file within the same folder as the component.
 - Import TypeScript prop types using `import type`:
 
 ```ts

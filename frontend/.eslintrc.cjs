@@ -15,6 +15,12 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'unused-imports', '@typescript-eslint'],
+  overrides: [
+    {
+      files: ['**/__test__/**/*.{ts,tsx}'],
+      extends: ['plugin:testing-library/react'],
+    },
+  ],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
