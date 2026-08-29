@@ -1,30 +1,75 @@
 {
-  "name": "frontend",
+  "name": "frontend-call-monitoring",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "preview": "vite preview",
+    "prepare": "cd .. && husky frontend/.husky || true"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint",
+      "prettier --write"
+    ]
   },
   "dependencies": {
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "@loadable/component": "^5.16.4",
+    "@tailwindcss/vite": "^4.0.0",
+    "@tanstack/react-query": "^5.66.0",
+    "@tanstack/react-table": "^8.21.2",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
+    "humps": "^2.0.1",
+    "js-cookie": "^3.0.8",
+    "ky": "^1.7.5",
+    "minimatch": "^10.0.1",
+    "query-string": "^9.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.2.0",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/node": "^24.13.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
-    "@vitejs/plugin-react": "^6.1.0",
-    "eslint": "^10.9.0",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.4",
-    "globals": "^17.11.0",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.67.0",
-    "vite": "^8.2.2"
-  }
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@tanstack/react-query-devtools": "^5.66.0",
+    "@testing-library/react": "^16.2.0",
+    "@types/humps": "^2.0.6",
+    "@types/js-cookie": "^3.0.6",
+    "@types/loadable__component": "^5.13.9",
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitejs/plugin-react-swc": "^3.8.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jest": "^27.4.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-testing-library": "^6.0.1",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "globals": "^15.11.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.1",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "engines": {
+    "npm": "please-use-yarn",
+    "node": ">= 16.x"
+  },
+  "engineStrict": true
 }

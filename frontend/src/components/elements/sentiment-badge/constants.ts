@@ -1,0 +1,1 @@
+export const SATISFIED_THRESHOLD = 70;

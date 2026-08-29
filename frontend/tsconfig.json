@@ -1,7 +1,51 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "paths": {
+      "react": ["./node_modules/@types/react"],
+      "@elements": ["./src/components/elements/index.ts"],
+      "@guards": ["./src/components/guards/index.ts"],
+      "@hooks": ["./src/hooks/index.ts"],
+      "@layouts": ["./src/components/layouts/index.ts"],
+      "@modules": ["./src/components/modules/index.ts"],
+      "@shapes": ["./src/components/shapes/index.ts"],
+      "@styles": ["./src/styles/index.ts"],
+
+      "@components/*": ["./src/components/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@elements/*": ["./src/components/elements/*"],
+      "@guards/*": ["./src/components/guards/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@layouts/*": ["./src/components/layouts/*"],
+      "@models/*": ["./src/models/*"],
+      "@modules/*": ["./src/components/modules/*"],
+      "@repositories/*": ["./src/repositories/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@core/*": ["./src/core/*"]
+    },
+    "lib": ["WebWorker", "dom", "dom.iterable", "esnext"],
+
+    /* Bundler mode */
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+
+    /* Linting */
+    "noFallthroughCasesInSwitch": true,
+
+    /* Extends */
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
